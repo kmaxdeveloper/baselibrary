@@ -21,20 +21,15 @@ abstract class BaseRecycleView<T : ViewBinding, D>(
     private var onItemClickListener: (() -> Unit)? = null
     fun setOnItemClickListener(listener: () -> Unit) { onItemClickListener = listener }
 
+    private var onItemSendListener: ((data : D) -> Unit)? = null
+    fun setOnItemSendListener(listener: (data : D) -> Unit) { onItemSendListener = listener }
+
     private val items = ArrayList<D>()
 
     fun setData(newItems: ArrayList<D>) {
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
-    }
-
-    fun sendMessage(task : Int , message: String){
-        onTaskListener?.invoke(task,message)
-    }
-
-    fun onItemClicked(){
-        onItemClickListener?.invoke()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
@@ -51,4 +46,16 @@ abstract class BaseRecycleView<T : ViewBinding, D>(
     abstract fun bind(binding: T, item: D)
 
     class BaseViewHolder<T : ViewBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
+
+    fun sendMessage(task : Int , message: String){
+        onTaskListener?.invoke(task,message)
+    }
+
+    fun sendData(data: D){
+        onItemSendListener?.invoke(data)
+    }
+
+    fun onItemClicked(){
+        onItemClickListener?.invoke()
+    }
 }

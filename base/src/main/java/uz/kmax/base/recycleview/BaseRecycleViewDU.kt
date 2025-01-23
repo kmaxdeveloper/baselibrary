@@ -24,6 +24,9 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
     private var onItemClickListener: (() -> Unit)? = null
     fun setOnItemClickListener(listener: () -> Unit) { onItemClickListener = listener }
 
+    private var onItemSendListener: ((data : D) -> Unit)? = null
+    fun setOnItemSendListener(listener: (data : D) -> Unit) { onItemSendListener = listener }
+
     private val items = ArrayList<D>()
 
     fun setItems(newItems: List<D>) {
@@ -38,14 +41,6 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
         items.clear()
         items.addAll(newItems)
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun sendMessage(task : Int , message: String){
-        onTaskListener?.invoke(task,message)
-    }
-
-    fun onItemClicked(){
-        onItemClickListener?.invoke()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
@@ -65,4 +60,16 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
     abstract fun areContentsTheSame(oldItem: D, newItem: D): Boolean
 
     class BaseViewHolder<T : ViewBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
+
+    fun sendMessage(task : Int , message: String){
+        onTaskListener?.invoke(task,message)
+    }
+
+    fun onItemClicked(){
+        onItemClickListener?.invoke()
+    }
+
+    fun sendData(data: D){
+        onItemSendListener?.invoke(data)
+    }
 }
