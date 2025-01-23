@@ -13,9 +13,7 @@ import androidx.lifecycle.LiveData
 class NetworkMonitor(private val connectManager: ConnectivityManager) : LiveData<Boolean>(){
 
     constructor(application: Application) : this(application.getSystemService(Context.CONNECTIVITY_SERVICE) as  ConnectivityManager)
-    private val networkCallback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-
-    object : ConnectivityManager.NetworkCallback(){
+    private val networkCallback = object : ConnectivityManager.NetworkCallback(){
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
             postValue(true)
@@ -27,14 +25,12 @@ class NetworkMonitor(private val connectManager: ConnectivityManager) : LiveData
     }
 
     @SuppressLint("MissingPermission")
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActive() {
         super.onActive()
         val builder = NetworkRequest.Builder()
         connectManager.registerNetworkCallback(builder.build(),networkCallback)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onInactive() {
         super.onInactive()
         connectManager.unregisterNetworkCallback(networkCallback)

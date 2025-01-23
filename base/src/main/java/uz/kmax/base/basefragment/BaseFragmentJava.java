@@ -9,6 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+/** BaseFragment classini
+ *  Java Versiyasi
+ *  2022 - yilda yozilgan
+ */
 public abstract class BaseFragmentJava extends Fragment {
     protected abstract int getFragmentLayout();
     public View view;
