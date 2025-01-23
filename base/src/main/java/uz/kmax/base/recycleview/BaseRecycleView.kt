@@ -1,22 +1,19 @@
-package uz.kmax.base.baserecycleview
+package uz.kmax.base.recycleview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import uz.kmax.base.tools.BaseDiffUtilCallback
 import uz.kmax.base.typlealias.BaseInflate
 
 /** 16.01.2025 y.
  *  RecycleView ni ixchamlashtirilgan kodi
  *  Kmax Programmers
- *
  */
 
-abstract class BaseRecycleViewDU<T : ViewBinding, D>(
+abstract class BaseRecycleView<T : ViewBinding, D>(
     private val inflate: BaseInflate<T>
-) : RecyclerView.Adapter<BaseRecycleViewDU.BaseViewHolder<T>>() {
+) : RecyclerView.Adapter<BaseRecycleView.BaseViewHolder<T>>() {
 
     private var onTaskListener: ((task : Int , message : String) -> Unit)? = null
     fun setOnTaskListener(listener: (task : Int , message : String) -> Unit) { onTaskListener = listener }
@@ -26,22 +23,19 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
 
     private val items = ArrayList<D>()
 
-    fun setItems(newItems: List<D>) {
-        val diffCallback = BaseDiffUtilCallback(
-            oldList = items,
-            newList = newItems,
-            areItemsTheSame = ::areItemsTheSame,
-            areContentsTheSame = ::areContentsTheSame
-        )
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-
+    fun setData(newItems: ArrayList<D>) {
         items.clear()
         items.addAll(newItems)
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
-    abstract fun areItemsTheSame(oldItem: D, newItem: D): Boolean
-    abstract fun areContentsTheSame(oldItem: D, newItem: D): Boolean
+    fun sendMessage(task : Int , message: String){
+        onTaskListener?.invoke(task,message)
+    }
+
+    fun onItemClicked(){
+        onItemClickListener?.invoke()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
         val binding = inflate(LayoutInflater.from(parent.context), parent, false)

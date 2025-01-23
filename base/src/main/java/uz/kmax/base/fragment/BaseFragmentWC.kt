@@ -1,4 +1,4 @@
-package uz.kmax.base.basefragment
+package uz.kmax.base.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
