@@ -29,7 +29,7 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
 
     private val items = ArrayList<D>()
 
-    fun setItems(newItems: List<D>) {
+    fun setItems(newItems: ArrayList<D>) {
         val diffCallback = BaseDiffUtilCallback(
             oldList = items,
             newList = newItems,
