@@ -1,7 +1,7 @@
 Example implementation : 
 
-implementation 'com.github.kmaxdeveloper:BaseLibrary:1.5.2'
+implementation("com.github.kmaxdeveloper:baselibrary:1.6.0")
 
 Maven :
 
-maven { url 'https://www.jitpack.io' }
+maven("https://www.jitpack.io")
