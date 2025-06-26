@@ -38,12 +38,12 @@ abstract class BaseRecycleView<T : ViewBinding, D>(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
-        bind(holder.binding, items[position])
+        bind(holder.binding, items[position], position)
     }
 
     override fun getItemCount(): Int = items.size
 
-    abstract fun bind(binding: T, item: D)
+    abstract fun bind(binding: T, item: D, position : Int)
 
     class BaseViewHolder<T : ViewBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
 
