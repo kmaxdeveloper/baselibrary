@@ -2,7 +2,8 @@ package uz.kmax.baselibrarys.basefragment;
 
 import android.widget.TextView;
 import android.widget.Toast;
-import uz.kmax.base.basefragment.BaseFragmentJava;
+
+import uz.kmax.base.fragment.BaseFragmentJava;
 import uz.kmax.baselibrarys.R;
 
 /***
