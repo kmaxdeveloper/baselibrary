@@ -1,6 +1,6 @@
 Example implementation : 
 
-implementation("com.github.kmaxdeveloper:baselibrary:1.6.5")
+implementation("com.github.kmaxdeveloper:baselibrary:1.7.1")
 
 Maven :
 
