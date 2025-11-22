@@ -56,6 +56,7 @@ abstract class BaseRecycleViewDU<T : ViewBinding, D>(
 
     abstract fun bind(binding: T, item: D, position: Int)
 
+
     abstract fun areItemsTheSame(oldItem: D, newItem: D): Boolean
     abstract fun areContentsTheSame(oldItem: D, newItem: D): Boolean
 

@@ -5,20 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import androidx.viewbinding.ViewBinding
 import uz.kmax.base.typlealias.BaseInflate
 
 /***
- *  Kmax Developer - 2022.12.16
+ *  Kmax Developer - 2025.11.23
  *  Typing in Kotlin
  *  Made In Uzbekistan
  */
 
-abstract class BaseFragmentBinding<VB : ViewBinding>(
+abstract class BaseFragmentNV<VB : ViewBinding>(
     private val inflate: BaseInflate<VB>
 ) : Fragment() {
     private var _binding: VB? = null
     val binding get() = _binding!!
+
+    protected lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,7 @@ abstract class BaseFragmentBinding<VB : ViewBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController(view)
         onViewCreated()
     }
 
